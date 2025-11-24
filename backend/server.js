@@ -2,6 +2,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import {connectDB} from './config/db.js';
+import { getProducts, addProduct, deleteProduct, updatePrice } from './controllers/productController.js';
 
 // From my project files (relative path)
 // import {getProducts, addProduct} from './controllers/productController.js';
@@ -19,6 +21,15 @@ app.use(express.json());
 app.get('/', (req, res) => {
     res.json({message: 'Price Checker API is running'});
 });
+
+
+// Product routes
+app.get('/api/products', getProducts);
+app.post('/api/products', addProduct);
+app.delete('/api/products/:id', deleteProduct);
+app.put('/api/products/:id/price', updatePrice);
+
+await connectDB();
 
 // Start server
 app.listen(PORT, () => {
