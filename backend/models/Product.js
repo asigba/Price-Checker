@@ -33,7 +33,26 @@ const productSchema = new mongoose.Schema({
   lastChecked: {
     type: Date,
     default: Date.now
-  }
+  },
+  alertEnabled: {
+    type: Boolean,
+    default: true
+  },
+  targetPrice: {
+    type: Number,
+    default: null
+  },
+  alerts: [
+    {
+      message: String,
+      oldPrice: String,
+      newPrice: String,
+      timestamp: {
+        type: Date,
+        default: Date.now
+      }
+    }
+  ]
 }, {
   timestamps: true  // Adds createdAt and updatedAt automatically
 });
